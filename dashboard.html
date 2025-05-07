@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <h1>Welcome To Your Growth Tracker</h1>
+        <h1>Welcome To Your Growth Tracker <span id="user-name"></span></h1>
         <div class="grid">
             <div class="card">💰 Finance</div>
             <div class="card">💪 Physique</div>
@@ -16,5 +16,9 @@
 
         </div>
     </div>
+    <script>
+        const username = localStorage.getItem("username");
+        document.getElementById("user-name").textContent = username ? username : "Guest";
+        </script>
 </body>
 </html>
