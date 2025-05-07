@@ -1,0 +1,77 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Finance | Growth Tracker</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .finance-container{
+                max-width: 500px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .finance-container h2{
+text-align: center;
+margin-bottom: 1rem;
+
+            }
+            .input-group{
+                display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+            }
+            .input-group input, .input-group select {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    .entry-list{
+        list-style: none;
+        padding: 0;
+
+    }
+    .entry-list li {
+        padding: 0.5rem;
+        border-bottom: 1px solid #ccc;
+
+    }
+
+        </style>
+    </head>
+    <body>
+        <div class="finance-container">
+            <h2>💰 Finance Tracker</h2>
+            <div class="input-group">
+                <input type="text" id="desc" placeholder="Description">
+                <input type="number" id="amount" placeholder="Amount">
+                <select id="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <button onclick="addEntry()">Add</button>
+
+            </div>
+            <ul class="entry-list" id="entry-list">
+
+            </ul>
+        </div>
+        <script>
+            function addEntry() {
+                const desc = document.getElementById("desc").value.trim();
+                const amount = parseFloat(document.getElementById("amount").value);
+                const type = document.getElementById("type").value;
+
+                if (!desc || isNaN(amount)) return;
+
+                const entrylist = document.getElementById("entry-list");
+                const li = document.createElement("li");
+                li.textContent = `${type === "income" ? "➕" : "➖"} ${desc}: ₹${amount}`;
+      entryList.appendChild(li);
+      document.getElementById("desc").value = "";
+      document.getElementById("amount").value = "";
+            }
+        </script>
+    </body>
+</html>
