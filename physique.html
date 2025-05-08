@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Physique | Growth Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .physique-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #e6fff5;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .workout {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .workout h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    button {
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="physique-container">
+    <h2>💪 Physique Tracker</h2>
+
+    <div class="workout">
+      <h3>Push-ups</h3>
+      <p>Level (Days Done): <span id="pushups-level">0</span></p>
+      <button onclick="markWorkout('pushups')">Mark as Done Today</button>
+    </div>
+
+    <div class="workout">
+      <h3>Pull-ups</h3>
+      <p>Level (Days Done): <span id="pullups-level">0</span></p>
+      <button onclick="markWorkout('pullups')">Mark as Done Today</button>
+    </div>
+  </div>
+
+  <script>
+    let workouts = JSON.parse(localStorage.getItem("physiqueData")) || {
+      pushups: { level: 0, lastDone: "" },
+      pullups: { level: 0, lastDone: "" }
+    };
+
+    function markWorkout(type) {
+      const today = new Date().toLocaleDateString();
+
+      if (workouts[type].lastDone === today) {
+        alert("You already marked this today!");
+        return;
+      }
+
+      workouts[type].level++;
+      workouts[type].lastDone = today;
+
+      localStorage.setItem("physiqueData", JSON.stringify(workouts));
+      updateLevels();
+    }
+
+    function updateLevels() {
+      document.getElementById("pushups-level").textContent = workouts.pushups.level;
+      document.getElementById("pullups-level").textContent = workouts.pullups.level;
+    }
+
+    updateLevels();
+  </script>
+</body>
+</html>
