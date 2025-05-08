@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Academic | Growth Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .academic-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #eef5ff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .subject {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .subject h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    button {
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="academic-container">
+    <h2>🎓 Academic Tracker</h2>
+
+    <div class="subject">
+      <h3>📘 Math</h3>
+      <p>Goal: Learn Limits and Continuity</p>
+      <p>Level: <span id="math-level">1</span></p>
+      <button onclick="completeGoal('math')">Mark as Done</button>
+    </div>
+
+    <div class="subject">
+      <h3>📗 Accounting</h3>
+      <p>Goal: Understand Basic Principles</p>
+      <p>Level: <span id="accounting-level">1</span></p>
+      <button onclick="completeGoal('accounting')">Mark as Done</button>
+    </div>
+  </div>
+
+  <script>
+    let levels = JSON.parse(localStorage.getItem("academicLevels")) || {
+      math: 1,
+      accounting: 1
+    };
+
+    function completeGoal(subject) {
+      levels[subject]++;
+      localStorage.setItem("academicLevels", JSON.stringify(levels));
+      updateLevels();
+    }
+
+    function updateLevels() {
+      document.getElementById("math-level").textContent = levels.math;
+      document.getElementById("accounting-level").textContent = levels.accounting;
+    }
+
+    // Load on start
+    updateLevels();
+  </script>
+</body>
+</html>
