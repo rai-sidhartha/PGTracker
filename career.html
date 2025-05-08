@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Career | Growth Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .career-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #fff7e6;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .goal {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .goal h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    button {
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="career-container">
+    <h2>🧑‍💼 Career Tracker</h2>
+    <p>Total Level: <span id="career-level">0</span></p>
+
+    <div class="goal">
+      <h3>📄 Build Resume</h3>
+      <button onclick="completeGoal('resume')">Mark as Done</button>
+    </div>
+
+    <div class="goal">
+      <h3>🔗 Create LinkedIn Profile</h3>
+      <button onclick="completeGoal('linkedin')">Mark as Done</button>
+    </div>
+
+    <div class="goal">
+      <h3>📧 Apply to 5 Jobs or Internships</h3>
+      <button onclick="completeGoal('apply')">Mark as Done</button>
+    </div>
+  </div>
+
+  <script>
+    let careerProgress = JSON.parse(localStorage.getItem("careerGoals")) || {
+      resume: false,
+      linkedin: false,
+      apply: false
+    };
+
+    function completeGoal(goal) {
+      if (careerProgress[goal]) {
+        alert("Already marked as done!");
+        return;
+      }
+
+      careerProgress[goal] = true;
+      localStorage.setItem("careerGoals", JSON.stringify(careerProgress));
+      updateCareerLevel();
+    }
+
+    function updateCareerLevel() {
+      const level = Object.values(careerProgress).filter(done => done).length;
+      document.getElementById("career-level").textContent = level;
+    }
+
+    updateCareerLevel();
+  </script>
+</body>
+</html>
