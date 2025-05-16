@@ -60,6 +60,17 @@
       <p>Level (Days Done): <span id="pullups-level">0</span></p>
       <button onclick="markWorkout('pullups')">Mark as Done Today</button>
     </div>
+    <div class="progress-section">
+      <h3>💪 Physique</h3>
+      <p id="physique-level-label">Level: 1</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="physique-progress-fill"></div>
+      </div>
+      <p id="physique-progress-label">0%</p>
+    
+      <button onclick="increasePhysiqueProgress(10)">+10% XP</button>
+    </div>
+    
   </div>
 
   <script>
@@ -90,5 +101,32 @@
 
     updateLevels();
   </script>
+  <script>
+    let physiqueProgress = parseInt(localStorage.getItem("physiqueProgress")) || 0;
+    let physiqueLevel = parseInt(localStorage.getItem("physiqueLevel")) || 1;
+  
+    function updatePhysiqueProgressBar() {
+      document.getElementById("physique-progress-fill").style.width = physiqueProgress + "%";
+      document.getElementById("physique-progress-label").textContent = physiqueProgress + "%";
+      document.getElementById("physique-level-label").textContent = "Level: " + physiqueLevel;
+    }
+  
+    function increasePhysiqueProgress(amount) {
+      physiqueProgress += amount;
+  
+      while (physiqueProgress >= 100) {
+        physiqueLevel += 1;
+        physiqueProgress -= 100;
+      }
+  
+      localStorage.setItem("physiqueProgress", physiqueProgress);
+      localStorage.setItem("physiqueLevel", physiqueLevel);
+  
+      updatePhysiqueProgressBar();
+    }
+  
+    updatePhysiqueProgressBar();
+  </script>
+  
 </body>
 </html>

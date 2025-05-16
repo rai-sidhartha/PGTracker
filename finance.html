@@ -68,6 +68,17 @@ margin-bottom: 1rem;
             <ul class="entry-list" id="entry-list">
 
             </ul>
+            <div class="progress-section">
+                <h3>💰 Finance</h3>
+                <p id="finance-level-label">Level: 1</p>
+                <div class="progress-bar">
+                  <div class="progress-fill" id="finance-progress-fill"></div>
+                </div>
+                <p id="finance-progress-label">0%</p>
+              
+                <button onclick="increaseFinanceProgress(10)">+10% XP</button>
+              </div>
+              
         </div>
         <script>
     
@@ -109,9 +120,40 @@ margin-bottom: 1rem;
     document.getElementById("amount").value = "";
   }
 
-  // Load on page start
+  
   updateList();
 </script>
+<script>
+  
+  let financeProgress = parseInt(localStorage.getItem("financeProgress")) || 0;
+  let financeLevel = parseInt(localStorage.getItem("financeLevel")) || 1;
+
+  function updateFinanceProgressBar() {
+    document.getElementById("finance-progress-fill").style.width = financeProgress + "%";
+    document.getElementById("finance-progress-label").textContent = financeProgress + "%";
+    document.getElementById("finance-level-label").textContent = "Level: " + financeLevel;
+  }
+
+  function increaseFinanceProgress(amount) {
+    financeProgress += amount;
+
+    
+    while (financeProgress >= 100) {
+      financeLevel += 1;
+      financeProgress -= 100;
+    }
+
+    // Save values
+    localStorage.setItem("financeProgress", financeProgress);
+    localStorage.setItem("financeLevel", financeLevel);
+
+    updateFinanceProgressBar();
+  }
+
+  
+  updateFinanceProgressBar();
+</script>
+
 
       
             

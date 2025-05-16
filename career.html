@@ -64,6 +64,17 @@
       <h3>📧 Apply to 5 Jobs or Internships</h3>
       <button onclick="completeGoal('apply')">Mark as Done</button>
     </div>
+    <div class="progress-section">
+      <h3>🧭 Career</h3>
+      <p id="career-level-label">Level: 1</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="career-progress-fill"></div>
+      </div>
+      <p id="career-progress-label">0%</p>
+    
+      <button onclick="increaseCareerProgress(10)">+10% XP</button>
+    </div>
+    
   </div>
 
   <script>

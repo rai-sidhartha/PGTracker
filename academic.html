@@ -46,6 +46,14 @@
 ">
 ⬅ Back to Dashboard
 </a>
+<div class="progress-section">
+  <h3>Academic Progress</h3>
+  <div class="progress-bar">
+    <div class="progress-fill" id="academic-progress-fill"></div>
+  </div>
+  <p id="academic-progress-label">0%</p>
+  <button onclick="increaseAcademicProgress(10)">+10% XP</button>
+</div>
   <div class="academic-container">
     <h2>🎓 Academic Tracker</h2>
 
@@ -55,6 +63,8 @@
       <p>Level: <span id="math-level">1</span></p>
       <button onclick="completeGoal('math')">Mark as Done</button>
     </div>
+    
+
 
     <div class="subject">
       <h3>📗 Accounting</h3>
@@ -81,8 +91,39 @@
       document.getElementById("accounting-level").textContent = levels.accounting;
     }
 
-    // Load on start
+
     updateLevels();
   </script>
+  <script>
+    
+    let academicProgress = parseInt(localStorage.getItem("academicProgress")) || 0;
+    let academicLevel = parseInt(localStorage.getItem("academicLevel")) || 1;
+  
+    function updateProgressBar() {
+      document.getElementById("academic-progress-fill").style.width = academicProgress + "%";
+      document.getElementById("academic-progress-label").textContent = academicProgress + "%";
+      document.getElementById("level-label").textContent = "Level: " + academicLevel;
+    }
+  
+    function increaseAcademicProgress(amount) {
+      academicProgress += amount;
+  
+      
+      while (academicProgress >= 100) {
+        academicLevel += 1;
+        academicProgress -= 100;
+      }
+  
+      
+      localStorage.setItem("academicProgress", academicProgress);
+      localStorage.setItem("academicLevel", academicLevel);
+  
+      updateProgressBar();
+    }
+  
+    
+    updateProgressBar();
+  </script>
+  
 </body>
 </html>
